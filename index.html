@@ -1,15 +1,27 @@
-<div id="repo-list">Loading projects...</div>
-
 <script>
+    // The list of repository names you want to show
+    const allowedRepos = [
+        'agentfleet-self-healing-robots',
+        'Autonomous-Mobile-Robot-Perception-Navigation',
+        'GestuBot2',
+        'Gestu_Bot'
+    ];
+
     fetch('https://api.github.com/users/RuGG12/repos?sort=updated')
     .then(response => response.json())
     .then(data => {
         const list = document.getElementById('repo-list');
-        list.innerHTML = ''; // Clear loading text
+        list.innerHTML = ''; 
+
         data.forEach(repo => {
-            if (!repo.fork) { // Only show your original work, not forks
+            // Check if the current repo name is in our allowed list
+            if (allowedRepos.includes(repo.name)) {
                 const item = document.createElement('div');
-                item.innerHTML = `<h3><a href="${repo.html_url}">${repo.name}</a></h3><p>${repo.description || 'No description'}</p>`;
+                item.style.marginBottom = "20px"; // Adds some breathing room
+                item.innerHTML = `
+                    <h3><a href="${repo.html_url}">${repo.name}</a></h3>
+                    <p>${repo.description || 'No description provided.'}</p>
+                `;
                 list.appendChild(item);
             }
         });
