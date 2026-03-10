@@ -236,17 +236,21 @@
   }
 
   .repo-card {
-    padding: 26px 30px;
     border-bottom: 1px solid #ebebeb;
+    cursor: pointer;
+  }
+  .repo-card:last-child { border-bottom: none; }
+
+  .card-summary {
+    padding: 26px 30px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 24px;
     transition: background 0.18s;
-    cursor: pointer;
   }
-  .repo-card:last-child { border-bottom: none; }
-  .repo-card:hover { background: #fafafa; }
+  .repo-card:hover .card-summary { background: #fafafa; }
+  .repo-card.open .card-summary { background: #fafafa; }
 
   .card-left { flex: 1; display: flex; flex-direction: column; gap: 7px; }
 
@@ -256,15 +260,13 @@
     color: #111;
     line-height: 1.3;
   }
-  .card-name a { color: inherit; transition: color 0.2s; }
-  .card-name a:hover { color: #555; }
 
   .card-desc {
     font-size: 13.5px;
     color: #777;
     line-height: 1.7;
     font-weight: 400;
-    max-width: 580px;
+    max-width: 600px;
   }
 
   .card-tags {
@@ -283,14 +285,84 @@
     letter-spacing: 0.03em;
   }
 
-  .card-arrow {
-    font-size: 18px;
-    color: #ccc;
+  .card-chevron {
+    font-size: 13px;
+    color: #bbb;
     flex-shrink: 0;
-    margin-top: 2px;
-    transition: color 0.2s, transform 0.2s;
+    margin-top: 3px;
+    transition: transform 0.25s ease, color 0.2s;
+    line-height: 1;
   }
-  .repo-card:hover .card-arrow { color: #111; transform: translate(2px, -2px); }
+  .repo-card:hover .card-chevron { color: #777; }
+  .repo-card.open .card-chevron { transform: rotate(180deg); color: #444; }
+
+  /* Expandable detail panel */
+  .card-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+  .repo-card.open .card-detail {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  .card-detail-inner {
+    padding: 0 30px 28px 30px;
+    border-top: 1px solid #f0f0f0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 48px;
+  }
+
+  .detail-block { display: flex; flex-direction: column; gap: 6px; }
+
+  .detail-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #aaa;
+  }
+
+  .detail-value {
+    font-size: 13.5px;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  .detail-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .stack-pill {
+    font-size: 11.5px;
+    font-weight: 500;
+    background: #111;
+    color: #fff;
+    padding: 3px 11px;
+    letter-spacing: 0.02em;
+  }
+
+  .card-github-link {
+    grid-column: 1 / -1;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    padding: 8px 18px;
+    width: fit-content;
+    transition: background 0.18s, border-color 0.18s;
+    margin-top: 4px;
+  }
+  .card-github-link:hover { background: #111; color: #fff; border-color: #111; }
 
   .loading-state {
     padding: 56px;
@@ -419,7 +491,7 @@
 </section>
 
 <footer>
-  <div class="footer-left">Rugved Ritesh Raote &nbsp;·&nbsp; Buffalo, NY &nbsp;·&nbsp; <a href="mailto:rugvedraote@gmail.com" style="color:#aaa;">rugvedraote@gmail.com</a></div>
+  <div class="footer-left">Rugved Ritesh Raote &nbsp;·&nbsp; Buffalo, NY &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#0577706273606177646a7160456268646c692b666a68" style="color:#aaa;"><span class="__cf_email__" data-cfemail="e391968495868791828c9786a3848e828a8fcd808c8e">[email&#160;protected]</span></a></div>
   <div class="footer-links">
     <a href="https://github.com/RuGG12" target="_blank">GitHub</a>
     <a href="https://www.linkedin.com/in/rugved-raote/" target="_blank">LinkedIn</a>
@@ -427,7 +499,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1 });
@@ -441,10 +513,34 @@
   ];
 
   const repoMeta = {
-    'agentfleet-self-healing-robots':                { tags: ['Multi-Agent AI', 'Gemini ADK', 'Fleet Systems'] },
-    'Autonomous-Mobile-Robot-Perception-Navigation': { tags: ['ROS 2', 'LiDAR', 'SLAM', 'Navigation'] },
-    'GestuBot2':                                     { tags: ['Gesture Control', 'Computer Vision', 'HRI'] },
-    'Gestu_Bot':                                     { tags: ['Gesture Control', 'Robotics'] }
+    'agentfleet-self-healing-robots': {
+      tags: ['Multi-Agent AI', 'Gemini ADK', 'Fleet Systems'],
+      desc: 'Enterprise self-healing robot fleet powered by Google Gemini 2.5 and ADK. Eliminates warehouse robot downtime through collaborative learning and adaptive recovery.',
+      role: 'Designed the multi-agent fault recovery architecture, integrating Gemini ADK for collaborative inter-agent learning and building the fleet-level health monitoring system.',
+      stack: ['Python', 'Google Gemini ADK', 'Multi-Agent Systems', 'Fleet Orchestration'],
+      outcome: 'Autonomous fault detection and adaptive recovery across distributed robot fleets, eliminating manual intervention for common failure modes.'
+    },
+    'Autonomous-Mobile-Robot-Perception-Navigation': {
+      tags: ['ROS 2', 'LiDAR', 'SLAM', 'Navigation'],
+      desc: 'ROS 2 package for real-time 3D-to-2D SLAM and autonomous navigation on the Husarion ROSbot XL with an Ouster OS1 LiDAR.',
+      role: 'Built the full perception-to-navigation pipeline with LiDAR preprocessing, 3D-to-2D projection, SLAM integration, and Nav2 stack tuning for real-world deployment.',
+      stack: ['ROS 2', 'Python', 'Ouster OS1 LiDAR', 'Nav2', 'SLAM Toolbox', 'Husarion ROSbot XL'],
+      outcome: 'Achieved real-time autonomous navigation in unstructured environments with stable localization across multiple test runs.'
+    },
+    'GestuBot2': {
+      tags: ['Gesture Control', 'Computer Vision', 'HRI', 'ROS 2'],
+      desc: 'Real-time hand gesture recognition system mapping 5 gesture classes to keyboard inputs (WASD) and a browser-based 3D robot arm, with ROS 2 integration for Gazebo simulation.',
+      role: 'Built the full ML pipeline from scratch with HSV-based hand segmentation, 13-dim feature extraction (Hu Moments + geometric ratios), SVM training with GridSearchCV, confidence filtering, and ROS 2 node wrapping for Gazebo.',
+      stack: ['Python', 'OpenCV', 'scikit-learn', 'ROS 2', 'WebSocket', 'Three.js'],
+      outcome: 'End-to-end inference latency of 15–20 ms per frame (p95 &lt; 20 ms). Confidence filter rejects ambiguous gestures, logged for active learning retraining loop.'
+    },
+    'Gestu_Bot': {
+      tags: ['Gesture Control', 'Computer Vision', 'SVM', 'HRI'],
+      desc: 'Earlier version of the GestuBot system with hand gesture recognition using HSV skin segmentation and SVM classification for keyboard-based robot teleoperation.',
+      role: 'Developed the original gesture-to-keyboard mapping pipeline, establishing the core feature engineering approach that carried forward into GestuBot2.',
+      stack: ['Python', 'OpenCV', 'scikit-learn', 'pyautogui'],
+      outcome: 'Functional real-time gesture teleoperation prototype that validated the SVM + engineered-features approach over a deep learning baseline.'
+    }
   };
 
   fetch('https://api.github.com/users/RuGG12/repos?sort=updated&per_page=100')
@@ -457,30 +553,50 @@
       document.getElementById('repo-count').textContent = filtered.length + ' projects';
 
       filtered.forEach((repo, i) => {
-        const meta = repoMeta[repo.name] || { tags: [] };
+        const meta = repoMeta[repo.name] || { tags: [], desc: '', role: '', stack: [], outcome: '' };
         const card = document.createElement('div');
         card.className = 'repo-card reveal';
         card.style.transitionDelay = (i * 0.07) + 's';
 
         const displayName = repo.name.replace(/-/g, ' ').replace(/_/g, ' ');
         const tagsHTML = meta.tags.map(t => '<span class="tag">' + t + '</span>').join('');
+        const stackHTML = (meta.stack || []).map(s => '<span class="stack-pill">' + s + '</span>').join('');
 
         card.innerHTML =
-          '<div class="card-left">' +
-            '<div class="card-name"><a href="' + repo.html_url + '" target="_blank">' + displayName + '</a></div>' +
-            '<div class="card-desc">' + (repo.description || 'No description provided.') + '</div>' +
-            '<div class="card-tags">' + tagsHTML + '</div>' +
+          '<div class="card-summary">' +
+            '<div class="card-left">' +
+              '<div class="card-name">' + displayName + '</div>' +
+              '<div class="card-desc">' + (meta.desc || repo.description || '') + '</div>' +
+              '<div class="card-tags">' + tagsHTML + '</div>' +
+            '</div>' +
+            '<div class="card-chevron">&#9660;</div>' +
           '</div>' +
-          '<div class="card-arrow">&#8599;</div>';
+          '<div class="card-detail">' +
+            '<div class="card-detail-inner">' +
+              '<div class="detail-block">' +
+                '<div class="detail-label">My Role</div>' +
+                '<div class="detail-value">' + (meta.role || '') + '</div>' +
+              '</div>' +
+              '<div class="detail-block">' +
+                '<div class="detail-label">Key Outcome</div>' +
+                '<div class="detail-value">' + (meta.outcome || '') + '</div>' +
+              '</div>' +
+              '<div class="detail-block" style="grid-column:1/-1">' +
+                '<div class="detail-label">Tech Stack</div>' +
+                '<div class="detail-stack">' + stackHTML + '</div>' +
+              '</div>' +
+              '<a class="card-github-link" href="' + repo.html_url + '" target="_blank" onclick="event.stopPropagation()">View on GitHub &#8599;</a>' +
+            '</div>' +
+          '</div>';
 
-        card.addEventListener('click', () => window.open(repo.html_url, '_blank'));
+        card.querySelector('.card-summary').addEventListener('click', () => {
+          const isOpen = card.classList.contains('open');
+          document.querySelectorAll('.repo-card.open').forEach(c => c.classList.remove('open'));
+          if (!isOpen) card.classList.add('open');
+        });
+
         list.appendChild(card);
         observer.observe(card);
       });
 
-      if (filtered.length === 0) list.innerHTML = '<div class="loading-state">No projects found.</div>';
-    })
-    .catch(() => { document.getElementById('repo-list').innerHTML = '<div class="loading-state">Could not load projects. Please refresh.</div>'; });
-</script>
-</body>
-</html>
+      if (filtered.length === 0) list.in
