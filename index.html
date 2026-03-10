@@ -420,7 +420,7 @@
   <div class="hero-text reveal">
     <h1 class="hero-greeting">Hi, I'm Rugved!</h1>
     <div class="hero-role">Robotics Engineer</div>
-    <p class="hero-bio">I deploy autonomy systems in real-world industrial environments, bridging ROS 2 software stacks with the physical constraints of machines that operate in demanding conditions.</p>
+    <p class="hero-bio">I deploy autonomy systems in real-world industrial environments — bridging ROS 2 software stacks with the physical constraints of machines that operate in demanding conditions.</p>
     <div class="hero-specialisms">
       <div class="hero-spec-item">ROS 2 autonomy stacks</div>
       <div class="hero-spec-item">Sensor fusion &amp; localization (EKF)</div>
@@ -438,7 +438,7 @@
   <div class="hero-card reveal" style="transition-delay:0.1s">
     <div class="stat-block">
       <div class="stat-num">MS</div>
-      <div class="stat-label">Robotics - SUNY Buffalo</div>
+      <div class="stat-label">Robotics — SUNY Buffalo</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-block">
@@ -523,20 +523,20 @@
     'Autonomous-Mobile-Robot-Perception-Navigation': {
       tags: ['ROS 2', 'LiDAR', 'SLAM', 'Navigation'],
       desc: 'ROS 2 package for real-time 3D-to-2D SLAM and autonomous navigation on the Husarion ROSbot XL with an Ouster OS1 LiDAR.',
-      role: 'Built the full perception-to-navigation pipeline with LiDAR preprocessing, 3D-to-2D projection, SLAM integration, and Nav2 stack tuning for real-world deployment.',
+      role: 'Built the full perception-to-navigation pipeline — LiDAR preprocessing, 3D-to-2D projection, SLAM integration, and Nav2 stack tuning for real-world deployment.',
       stack: ['ROS 2', 'Python', 'Ouster OS1 LiDAR', 'Nav2', 'SLAM Toolbox', 'Husarion ROSbot XL'],
       outcome: 'Achieved real-time autonomous navigation in unstructured environments with stable localization across multiple test runs.'
     },
     'GestuBot2': {
       tags: ['Gesture Control', 'Computer Vision', 'HRI', 'ROS 2'],
       desc: 'Real-time hand gesture recognition system mapping 5 gesture classes to keyboard inputs (WASD) and a browser-based 3D robot arm, with ROS 2 integration for Gazebo simulation.',
-      role: 'Built the full ML pipeline from scratch with HSV-based hand segmentation, 13-dim feature extraction (Hu Moments + geometric ratios), SVM training with GridSearchCV, confidence filtering, and ROS 2 node wrapping for Gazebo.',
+      role: 'Built the full ML pipeline from scratch — HSV-based hand segmentation, 13-dim feature extraction (Hu Moments + geometric ratios), SVM training with GridSearchCV, confidence filtering, and ROS 2 node wrapping for Gazebo.',
       stack: ['Python', 'OpenCV', 'scikit-learn', 'ROS 2', 'WebSocket', 'Three.js'],
       outcome: 'End-to-end inference latency of 15–20 ms per frame (p95 &lt; 20 ms). Confidence filter rejects ambiguous gestures, logged for active learning retraining loop.'
     },
     'Gestu_Bot': {
       tags: ['Gesture Control', 'Computer Vision', 'SVM', 'HRI'],
-      desc: 'Earlier version of the GestuBot system with hand gesture recognition using HSV skin segmentation and SVM classification for keyboard-based robot teleoperation.',
+      desc: 'Earlier version of the GestuBot system — hand gesture recognition using HSV skin segmentation and SVM classification for keyboard-based robot teleoperation.',
       role: 'Developed the original gesture-to-keyboard mapping pipeline, establishing the core feature engineering approach that carried forward into GestuBot2.',
       stack: ['Python', 'OpenCV', 'scikit-learn', 'pyautogui'],
       outcome: 'Functional real-time gesture teleoperation prototype that validated the SVM + engineered-features approach over a deep learning baseline.'
@@ -599,4 +599,11 @@
         observer.observe(card);
       });
 
-      if (filtered.length === 0) list.in
+      if (filtered.length === 0) list.innerHTML = '<div class="loading-state">No projects found.</div>';
+    })
+    .catch(() => {
+      document.getElementById('repo-list').innerHTML = '<div class="loading-state">Could not load projects. Visit <a href="https://github.com/RuGG12" target="_blank" style="color:#111">GitHub</a> directly.</div>';
+    });
+</script>
+</body>
+</html>
