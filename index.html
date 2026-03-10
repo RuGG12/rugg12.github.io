@@ -1,29 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rugved Ritesh Raote — Robotics Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: #fff;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 72px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #111; }
+
+  /* HERO */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 88px 72px 80px;
+    gap: 60px;
+  }
+
+  .hero-text { max-width: 540px; }
+
+  .hero-greeting {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(42px, 5.5vw, 68px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #111;
+    margin-bottom: 14px;
+  }
+
+  .hero-role {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(17px, 2.2vw, 22px);
+    font-weight: 700;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 22px;
+  }
+
+  .hero-bio {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #666;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  .hero-specialisms {
+    margin: 16px 0 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-spec-item {
+    font-size: 13.5px;
+    color: #555;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-spec-item::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 1.5px;
+    background: #aaa;
+    flex-shrink: 0;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .btn {
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 12px 26px;
+    transition: all 0.2s;
+    display: inline-block;
+    border-radius: 2px;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-dark { background: #111; color: #fff; }
+  .btn-dark:hover { background: #333; }
+
+  .btn-outline { border: 1.5px solid #ddd; color: #111; }
+  .btn-outline:hover { border-color: #111; }
+
+  /* HERO CARD */
+  .hero-card {
+    flex-shrink: 0;
+    width: 300px;
+    background: #f8f8f8;
+    border: 1px solid #ebebeb;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .stat-block { display: flex; flex-direction: column; gap: 5px; }
+
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #111;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .stat-divider { width: 100%; height: 1px; background: #e8e8e8; }
+
+  /* WHAT I DO */
+  .what-section {
+    background: #f8f8f8;
+    padding: 80px 72px;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .section-heading {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 900;
+    color: #111;
+    margin-bottom: 44px;
+  }
+
+  .what-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+  }
+
+  .what-item {
+    background: #fff;
+    padding: 30px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .what-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .what-desc {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  /* PROJECTS */
+  .projects-section { padding: 80px 72px; }
+
+  .projects-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 36px;
+  }
+
+  .projects-sub {
+    font-size: 13px;
+    color: #aaa;
+    font-weight: 400;
+  }
+
+  #repo-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ebebeb;
+  }
+
+  .repo-card {
+    padding: 26px 30px;
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    transition: background 0.18s;
+    cursor: pointer;
+  }
+  .repo-card:last-child { border-bottom: none; }
+  .repo-card:hover { background: #fafafa; }
+
+  .card-left { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+
+  .card-name {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.3;
+  }
+  .card-name a { color: inherit; transition: color 0.2s; }
+  .card-name a:hover { color: #555; }
+
+  .card-desc {
+    font-size: 13.5px;
+    color: #777;
+    line-height: 1.7;
+    font-weight: 400;
+    max-width: 580px;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: #555;
+    background: #f2f2f2;
+    padding: 3px 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .card-arrow {
+    font-size: 18px;
+    color: #ccc;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .repo-card:hover .card-arrow { color: #111; transform: translate(2px, -2px); }
+
+  .loading-state {
+    padding: 56px;
+    text-align: center;
+    font-size: 14px;
+    color: #aaa;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid #f0f0f0;
+    padding: 36px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-left { font-size: 13px; color: #aaa; font-weight: 400; }
+
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { font-size: 13px; font-weight: 500; color: #888; transition: color 0.2s; }
+  .footer-links a:hover { color: #111; }
+
+  /* FADE IN */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    nav, .hero, .what-section, .projects-section, footer { padding-left: 24px; padding-right: 24px; }
+    .hero { flex-direction: column; padding-top: 52px; padding-bottom: 52px; }
+    .hero-card { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Rugved Raote</div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="https://github.com/RuGG12" target="_blank">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/rugved-raote/" target="_blank">LinkedIn</a></li>
+    <li><a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:25c6c4f8-c16e-4864-ae37-cf91a7397aba" target="_blank">Resume</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-text reveal">
+    <h1 class="hero-greeting">Hi, I'm Rugved!</h1>
+    <div class="hero-role">Robotics Engineer</div>
+    <p class="hero-bio">I deploy autonomy systems in real-world industrial environments — bridging ROS 2 software stacks with the physical constraints of machines that operate in demanding conditions.</p>
+    <div class="hero-specialisms">
+      <div class="hero-spec-item">ROS 2 autonomy stacks</div>
+      <div class="hero-spec-item">Sensor fusion &amp; localization (EKF)</div>
+      <div class="hero-spec-item">Closed-loop control tuning</div>
+      <div class="hero-spec-item">Edge deployment &amp; real-world validation</div>
+      <div class="hero-spec-item">Hardware and software integration</div>
+    </div>
+    <div class="hero-btns">
+      <a class="btn btn-dark" href="https://www.linkedin.com/in/rugved-raote/" target="_blank">Connect on LinkedIn</a>
+      <a class="btn btn-outline" href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:25c6c4f8-c16e-4864-ae37-cf91a7397aba" target="_blank">View Resume</a>
+      <a class="btn btn-outline" href="#projects">Projects</a>
+    </div>
+  </div>
+
+  <div class="hero-card reveal" style="transition-delay:0.1s">
+    <div class="stat-block">
+      <div class="stat-num">MS</div>
+      <div class="stat-label">Robotics — SUNY Buffalo</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">3.57</div>
+      <div class="stat-label">GPA / 4.0</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">ROS 2</div>
+      <div class="stat-label">Primary Framework</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-block">
+      <div class="stat-num">4+</div>
+      <div class="stat-label">Open-Source Projects</div>
+    </div>
+  </div>
+</section>
+
+<section class="what-section">
+  <h2 class="section-heading reveal">What I Work On</h2>
+  <div class="what-grid reveal" style="transition-delay:0.1s">
+    <div class="what-item">
+      <div class="what-name">Autonomous Excavator</div>
+      <div class="what-desc">Industry-sponsored project — ROS 2 localization, EKF sensor fusion, and closed-loop hydraulic control under terrain disturbance.</div>
+    </div>
+    <div class="what-item">
+      <div class="what-name">SLAM &amp; Navigation</div>
+      <div class="what-desc">Real-time 3D-to-2D mapping and autonomous navigation on mobile platforms with LiDAR.</div>
+    </div>
+    <div class="what-item">
+      <div class="what-name">Edge Deployment</div>
+      <div class="what-desc">Jetson-based deployment, Dockerized ROS nodes, HIL validation, and field debugging with system logs.</div>
+    </div>
+    <div class="what-item">
+      <div class="what-name">Human-Robot Interaction</div>
+      <div class="what-desc">Gesture-controlled robot systems using computer vision and real-time inference.</div>
+    </div>
+  </div>
+</section>
+
+<section class="projects-section" id="projects">
+  <div class="projects-header reveal">
+    <h2 class="section-heading" style="margin-bottom:0">Projects</h2>
+    <span class="projects-sub" id="repo-count"></span>
+  </div>
+  <div id="repo-list">
+    <div class="loading-state">Loading projects…</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">Rugved Ritesh Raote &nbsp;·&nbsp; Buffalo, NY &nbsp;·&nbsp; <a href="mailto:rugvedraote@gmail.com" style="color:#aaa;">rugvedraote@gmail.com</a></div>
+  <div class="footer-links">
+    <a href="https://github.com/RuGG12" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/rugved-raote/" target="_blank">LinkedIn</a>
+    <a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:25c6c4f8-c16e-4864-ae37-cf91a7397aba" target="_blank">Resume</a>
+  </div>
+</footer>
+
 <script>
-    // The list of repository names you want to show
-    const allowedRepos = [
-        'agentfleet-self-healing-robots',
-        'Autonomous-Mobile-Robot-Perception-Navigation',
-        'GestuBot2',
-        'Gestu_Bot'
-    ];
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    fetch('https://api.github.com/users/RuGG12/repos?sort=updated')
-    .then(response => response.json())
+  const allowedRepos = [
+    'agentfleet-self-healing-robots',
+    'Autonomous-Mobile-Robot-Perception-Navigation',
+    'GestuBot2',
+    'Gestu_Bot'
+  ];
+
+  const repoMeta = {
+    'agentfleet-self-healing-robots':                { tags: ['Multi-Agent AI', 'Gemini ADK', 'Fleet Systems'] },
+    'Autonomous-Mobile-Robot-Perception-Navigation': { tags: ['ROS 2', 'LiDAR', 'SLAM', 'Navigation'] },
+    'GestuBot2':                                     { tags: ['Gesture Control', 'Computer Vision', 'HRI'] },
+    'Gestu_Bot':                                     { tags: ['Gesture Control', 'Robotics'] }
+  };
+
+  fetch('https://api.github.com/users/RuGG12/repos?sort=updated&per_page=100')
+    .then(r => r.json())
     .then(data => {
-        const list = document.getElementById('repo-list');
-        list.innerHTML = ''; 
+      const list = document.getElementById('repo-list');
+      list.innerHTML = '';
+      const filtered = data.filter(r => allowedRepos.includes(r.name));
+      filtered.sort((a, b) => allowedRepos.indexOf(a.name) - allowedRepos.indexOf(b.name));
+      document.getElementById('repo-count').textContent = filtered.length + ' projects';
 
-        data.forEach(repo => {
-            // Check if the current repo name is in our allowed list
-            if (allowedRepos.includes(repo.name)) {
-                const item = document.createElement('div');
-                item.style.marginBottom = "20px"; // Adds some breathing room
-                item.innerHTML = `
-                    <h3><a href="${repo.html_url}">${repo.name}</a></h3>
-                    <p>${repo.description || 'No description provided.'}</p>
-                `;
-                list.appendChild(item);
-            }
-        });
-    });
+      filtered.forEach((repo, i) => {
+        const meta = repoMeta[repo.name] || { tags: [] };
+        const card = document.createElement('div');
+        card.className = 'repo-card reveal';
+        card.style.transitionDelay = (i * 0.07) + 's';
+
+        const displayName = repo.name.replace(/-/g, ' ').replace(/_/g, ' ');
+        const tagsHTML = meta.tags.map(t => '<span class="tag">' + t + '</span>').join('');
+
+        card.innerHTML =
+          '<div class="card-left">' +
+            '<div class="card-name"><a href="' + repo.html_url + '" target="_blank">' + displayName + '</a></div>' +
+            '<div class="card-desc">' + (repo.description || 'No description provided.') + '</div>' +
+            '<div class="card-tags">' + tagsHTML + '</div>' +
+          '</div>' +
+          '<div class="card-arrow">&#8599;</div>';
+
+        card.addEventListener('click', () => window.open(repo.html_url, '_blank'));
+        list.appendChild(card);
+        observer.observe(card);
+      });
+
+      if (filtered.length === 0) list.innerHTML = '<div class="loading-state">No projects found.</div>';
+    })
+    .catch(() => { document.getElementById('repo-list').innerHTML = '<div class="loading-state">Could not load projects. Please refresh.</div>'; });
 </script>
+</body>
+</html>
