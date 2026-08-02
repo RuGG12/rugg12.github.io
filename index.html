@@ -412,7 +412,7 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="https://github.com/RuGG12" target="_blank">GitHub</a></li>
     <li><a href="https://www.linkedin.com/in/rugved-raote/" target="_blank">LinkedIn</a></li>
-    <li><a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:25c6c4f8-c16e-4864-ae37-cf91a7397aba" target="_blank">Resume</a></li>
+    <li><a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:47475186-e303-4d20-b9d9-a34c714623f1" target="_blank">Resume</a></li>
   </ul>
 </nav>
 
@@ -420,7 +420,7 @@
   <div class="hero-text reveal">
     <h1 class="hero-greeting">Hi, I'm Rugved!</h1>
     <div class="hero-role">Robotics Engineer</div>
-    <p class="hero-bio">I deploy autonomy systems in real-world industrial environments — bridging ROS 2 software stacks with the physical constraints of machines that operate in demanding conditions.</p>
+    <p class="hero-bio">I deploy autonomy systems in real-world industrial environments  bridging ROS 2 software stacks with the physical constraints of machines that operate in demanding conditions.</p>
     <div class="hero-specialisms">
       <div class="hero-spec-item">ROS 2 autonomy stacks</div>
       <div class="hero-spec-item">Sensor fusion &amp; localization (EKF)</div>
@@ -430,7 +430,7 @@
     </div>
     <div class="hero-btns">
       <a class="btn btn-dark" href="https://www.linkedin.com/in/rugved-raote/" target="_blank">Connect on LinkedIn</a>
-      <a class="btn btn-outline" href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:25c6c4f8-c16e-4864-ae37-cf91a7397aba" target="_blank">View Resume</a>
+      <a class="btn btn-outline" href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:47475186-e303-4d20-b9d9-a34c714623f1" target="_blank">View Resume</a>
       <a class="btn btn-outline" href="#projects">Projects</a>
     </div>
   </div>
@@ -452,7 +452,7 @@
     </div>
     <div class="stat-divider"></div>
     <div class="stat-block">
-      <div class="stat-num">4+</div>
+      <div class="stat-num">5+</div>
       <div class="stat-label">Open-Source Projects</div>
     </div>
   </div>
@@ -466,6 +466,10 @@
       <div class="what-desc">Industry-sponsored project — ROS 2 localization, EKF sensor fusion, and closed-loop hydraulic control under terrain disturbance.</div>
     </div>
     <div class="what-item">
+      <div class="what-name">Surgical Robotics &amp; Motion Control</div>
+      <div class="what-desc">Remote Center of Motion control, Jacobian-based inverse kinematics, and precision motion constraints for surgical robot arms.</div>
+    </div>
+    <div class="what-item">
       <div class="what-name">SLAM &amp; Navigation</div>
       <div class="what-desc">Real-time 3D-to-2D mapping and autonomous navigation on mobile platforms with LiDAR.</div>
     </div>
@@ -476,6 +480,10 @@
     <div class="what-item">
       <div class="what-name">Human-Robot Interaction</div>
       <div class="what-desc">Gesture-controlled robot systems using computer vision and real-time inference.</div>
+    </div>
+    <div class="what-item">
+      <div class="what-name">Test &amp; Validation Engineering</div>
+      <div class="what-desc">DVT/TMV on robotic tooling, fixture design, and hardware-software debugging within a regulated R&amp;D environment.</div>
     </div>
   </div>
 </section>
@@ -495,7 +503,7 @@
   <div class="footer-links">
     <a href="https://github.com/RuGG12" target="_blank">GitHub</a>
     <a href="https://www.linkedin.com/in/rugved-raote/" target="_blank">LinkedIn</a>
-    <a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:25c6c4f8-c16e-4864-ae37-cf91a7397aba" target="_blank">Resume</a>
+    <a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:47475186-e303-4d20-b9d9-a34c714623f1" target="_blank">Resume</a>
   </div>
 </footer>
 
@@ -506,6 +514,7 @@
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   const allowedRepos = [
+    'rcm-control',
     'agentfleet-self-healing-robots',
     'Autonomous-Mobile-Robot-Perception-Navigation',
     'GestuBot2',
@@ -513,6 +522,13 @@
   ];
 
   const repoMeta = {
+    'rcm-control': {
+      tags: ['Motion Control', 'Kinematics', 'Surgical Robotics'],
+      desc: 'Software-defined Remote Center of Motion (RCM) controller for a UR5 robot arm — the core motion constraint used in surgical and laparoscopic robotics.',
+      role: 'Implemented null-space Jacobian projection, damped least-squares inverse kinematics, and real-time drift correction; designed and ran a comparative evaluation across two controller architectures.',
+      stack: ['Python', 'ROS 2', 'MoveIt', 'Jacobian-based IK'],
+      outcome: 'Achieved 0.0777mm mean RCM error — roughly 384x better than the 29.8mm baseline reported in clinical literature.'
+    },
     'agentfleet-self-healing-robots': {
       tags: ['Multi-Agent AI', 'Gemini ADK', 'Fleet Systems'],
       desc: 'Enterprise self-healing robot fleet powered by Google Gemini 2.5 and ADK. Eliminates warehouse robot downtime through collaborative learning and adaptive recovery.',
